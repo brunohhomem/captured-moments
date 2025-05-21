@@ -1,9 +1,15 @@
 import { FastifyReply, FastifyRequest } from "fastify"
 import { CreateUserService } from "../service/CreateUserService"
 
+interface UserProps {
+  fullName: string
+  email: string
+  password: string
+}
+
 class CreateUserController {
   async handle(request: FastifyRequest, reply: FastifyReply) {
-    const { fullName, email, password } = request.body as { fullName: string, email: string, password: string }
+    const { fullName, email, password } = request.body as UserProps
 
     if (!fullName || !email || !password) {
       return reply.status(400).send({ message: "Todos os campos são requeridos" })
