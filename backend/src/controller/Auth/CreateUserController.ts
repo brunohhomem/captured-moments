@@ -1,5 +1,5 @@
 import { FastifyReply, FastifyRequest } from "fastify"
-import { CreateUserService } from "../service/CreateUserService"
+import { CreateUserService } from "../../service/Auth/CreateUserService"
 
 interface UserProps {
   fullName: string
@@ -12,13 +12,13 @@ class CreateUserController {
     const { fullName, email, password } = request.body as UserProps
 
     if (!fullName || !email || !password) {
-      return reply.status(400).send({ message: "Todos os campos são requeridos" })
+      return reply.status(400).send({ message: "All fields are required" })
     }
 
     try {
-      const createUserService = new CreateUserService() //Incializar o service
+      const createUserService = new CreateUserService()
 
-      const user = await createUserService.execute({ //Acessar o método dentro do service
+      const user = await createUserService.execute({
         fullName,
         email,
         password

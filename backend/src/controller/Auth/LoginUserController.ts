@@ -1,5 +1,5 @@
 import { FastifyReply, FastifyRequest } from "fastify"
-import { LoginUserService } from "../service/LoginUserService"
+import { LoginUserService } from "../../service/Auth/LoginUserService"
 
 interface UserProps {
   email: string
@@ -11,7 +11,7 @@ class LoginUserController {
     const { email, password } = request.body as UserProps
 
     if (!email || !password) {
-      return reply.status(400).send({ message: "Todos os campos são requeridos" })
+      return reply.status(400).send({ message: "All fields are required" })
     }
 
     try {

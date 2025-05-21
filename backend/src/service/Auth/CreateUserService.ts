@@ -1,4 +1,4 @@
-import prismaClient from "../prisma"
+import prismaClient from "../../prisma"
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
@@ -16,7 +16,7 @@ class CreateUserService {
     })
 
     if (isUser) {
-      throw new Error("Usuário já existe")
+      throw new Error("User already exists")
     }
 
     const hashedPassword = await bcrypt.hash(password, 10)
@@ -39,7 +39,7 @@ class CreateUserService {
       error: false,
       user: { fullName: user.fullName, email: user.email },
       accessToken,
-      message: "Registro efetuado com sucesso"
+      message: "Successfully registered"
     }
     )
   }

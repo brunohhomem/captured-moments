@@ -1,4 +1,4 @@
-import prismaClient from "../prisma"
+import prismaClient from "../../prisma"
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
@@ -15,13 +15,13 @@ class LoginUserService {
     })
 
     if (!user) {
-      throw new Error("Credenciais inválidas")
+      throw new Error("Invalid credentials")
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password)
 
     if (!isPasswordValid) {
-      throw new Error("Credenciais inválidas")
+      throw new Error("Invalid credentials")
     }
 
     const accessToken = jwt.sign(
@@ -32,7 +32,7 @@ class LoginUserService {
 
     return {
       erro: false,
-      message: "Login efetuado com sucesso",
+      message: "Login successful",
       user: {
         fullName: user.fullName,
         email: user.email
