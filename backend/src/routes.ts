@@ -8,6 +8,8 @@ import { GetAllMomentsController } from "./controller/Moments/GetAllMomentsContr
 import { SearchAllMomentsController } from "./controller/Moments/SearchAllMomentsController";
 import { UpdateMomentsController } from "./controller/Moments/UpdateMomentsController";
 import { GenerateIaController } from "./controller/IA/GenerateIaController";
+import { UploadFileController } from "./controller/Upload/UploadFileController";
+import { upload } from "./config/multer";
 
 export function routes(fastify: FastifyInstance) {
 
@@ -50,5 +52,11 @@ export function routes(fastify: FastifyInstance) {
   fastify.post('/ia', async (request: FastifyRequest, reply: FastifyReply) => {
     return new GenerateIaController().handle(request, reply)
   })
+
+  //UPLOAD: UPLOAD IMAGE
+  fastify.post('/image-upload', { preHandler: upload.single("image") }, async (request: FastifyRequest, reply: FastifyReply) => {
+    return new UploadFileController().handle(request, reply)
+  })
+
 
 }
