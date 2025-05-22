@@ -13,11 +13,14 @@ class AddMomentsService {
 
     const parsedVisitedDate = new Date(parseInt(moment.visitedDate))
 
+    const placeHolderImageUrl = `http://localhost:8000/uploads/placeholder.svg`
+
     const registeredMoment = await prismaClient.registeredMoment.create({
       data: {
         ...moment,
         visitedDate: parsedVisitedDate,
-        userId: userId
+        userId: userId,
+        imageUrl: moment.imageUrl || placeHolderImageUrl
       }
     })
 

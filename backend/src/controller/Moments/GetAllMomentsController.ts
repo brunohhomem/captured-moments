@@ -5,7 +5,7 @@ class GetAllMomentsController {
   async handle(request: FastifyRequest, reply: FastifyReply) {
     const { user } = request
 
-    if (!user) return reply.status(400).send({ error: true, message: "User does not exists!" })
+    if (!user) return reply.status(400).send({ error: true, message: "User not found!" })
 
     try {
       const getAllMomentsService = new GetAllMomentsService()

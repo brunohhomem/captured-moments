@@ -1,5 +1,5 @@
 import { FastifyReply, FastifyRequest } from "fastify"
-import { AddMomentsService } from "../../service/Moments/AddMomentsService";
+import { UpdateMomentsService } from "../../service/Moments/UpdateMomentsService";
 
 interface RegisteredMomentProps {
   title: string;
@@ -9,8 +9,9 @@ interface RegisteredMomentProps {
   visitedDate: string;
 }
 
-class AddMomentsController {
+class UpdateMomentsController {
   async handle(request: FastifyRequest, reply: FastifyReply) {
+    const { id } = request.params as { id: string }
     const { user } = request
     const moment = request.body as RegisteredMomentProps
 
@@ -20,14 +21,14 @@ class AddMomentsController {
       return reply.status(400).send({ error: true, message: "All fields are required!" })
 
     try {
-      const addMomentsService = new AddMomentsService()
-      const addMoments = await addMomentsService.execute(moment, user.userId)
+      const updateMomentsService = new UpdateMomentsService()
+      const updateMoment = await updateMomentsService.execute(moment, user.userId, id)
 
-      return reply.status(201).send({ moment: addMoments, message: "Added successfully" })
+      return reply.status(201).send({ moment: updateMoment, message: "Updated successfully" })
     } catch (error: any) {
       return reply.status(400).send({ erro: true, message: error.message })
     }
   }
 }
 
-export { AddMomentsController }
+export { UpdateMomentsController }
