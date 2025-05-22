@@ -1,5 +1,4 @@
 import { FastifyReply, FastifyRequest } from "fastify"
-import { AddMomentsService } from "../../service/Moments/AddMomentsService";
 import { GetAllMomentsService } from "../../service/Moments/GetAllMomentsService";
 
 class GetAllMomentsController {

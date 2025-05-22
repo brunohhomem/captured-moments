@@ -5,6 +5,7 @@ import { LoginUserController } from "./controller/Auth/LoginUserController";
 import { GetUserController } from "./controller/Auth/GetUserController";
 import { AddMomentsController } from "./controller/Moments/AddMomentsController";
 import { GetAllMomentsController } from "./controller/Moments/GetAllMomentsController";
+import { SearchAllMomentsController } from "./controller/Moments/SearchAllMomentsController";
 
 export function routes(fastify: FastifyInstance) {
 
@@ -31,6 +32,11 @@ export function routes(fastify: FastifyInstance) {
   //MOMENT: GET ALL MOMENTS BY USER
   fastify.get('/get-all-moments', { preHandler: authenticateToken }, async (request: FastifyRequest, reply: FastifyReply) => {
     return new GetAllMomentsController().handle(request, reply)
+  })
+
+  //MOMENT: SEARCH MOMENTS BY QUERY PARAMS
+  fastify.get('/search', { preHandler: authenticateToken }, async (request: FastifyRequest, reply: FastifyReply) => {
+    return new SearchAllMomentsController().handle(request, reply)
   })
 
 }
