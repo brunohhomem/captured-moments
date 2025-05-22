@@ -7,6 +7,7 @@ import { AddMomentsController } from "./controller/Moments/AddMomentsController"
 import { GetAllMomentsController } from "./controller/Moments/GetAllMomentsController";
 import { SearchAllMomentsController } from "./controller/Moments/SearchAllMomentsController";
 import { UpdateMomentsController } from "./controller/Moments/UpdateMomentsController";
+import { GenerateIaController } from "./controller/IA/GenerateIaController";
 
 export function routes(fastify: FastifyInstance) {
 
@@ -43,6 +44,11 @@ export function routes(fastify: FastifyInstance) {
   //MOMENT: UPDATE MOMENTS
   fastify.put('/edit-moment/:id', { preHandler: authenticateToken }, async (request: FastifyRequest, reply: FastifyReply) => {
     return new UpdateMomentsController().handle(request, reply)
+  })
+
+  //IA: GENERATE TEXT
+  fastify.post('/ia', async (request: FastifyRequest, reply: FastifyReply) => {
+    return new GenerateIaController().handle(request, reply)
   })
 
 }
