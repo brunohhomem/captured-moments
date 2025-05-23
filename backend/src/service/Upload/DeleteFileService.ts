@@ -6,7 +6,7 @@ class DeleteFileService {
     const fileName = path.basename(imageUrl)
 
     // Não deleta a imagem default
-    if (fileName === 'image-default.png') {
+    if (fileName === 'placeholder.svg') {
       return { message: 'Image default has been preserved' }
     }
 

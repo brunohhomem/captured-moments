@@ -11,6 +11,7 @@ import { GenerateIaController } from "./controller/IA/GenerateIaController";
 import { UploadFileController } from "./controller/Upload/UploadFileController";
 import { upload } from "./config/multer";
 import { DeleteFileController } from "./controller/Upload/DeleteFileController";
+import { DeleteMomentsController } from "./controller/Moments/DeleteMomentsController";
 
 export function routes(fastify: FastifyInstance) {
 
@@ -47,6 +48,11 @@ export function routes(fastify: FastifyInstance) {
   //MOMENT: UPDATE MOMENTS
   fastify.put('/edit-moment/:id', { preHandler: authenticateToken }, async (request: FastifyRequest, reply: FastifyReply) => {
     return new UpdateMomentsController().handle(request, reply)
+  })
+
+  // MOMENT: DELETAR MOMENTO
+  fastify.delete('/delete-moment/:id', { preHandler: authenticateToken }, async (request: FastifyRequest, reply: FastifyReply) => {
+    return new DeleteMomentsController().handle(request, reply)
   })
 
   //IA: GENERATE TEXT
