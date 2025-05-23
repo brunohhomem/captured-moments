@@ -20,7 +20,7 @@ class DeleteMomentsService {
     })
 
     if (!registerMoment) {
-      throw new Error("register Moment not found!")
+      throw new Error("Moment not found!")
     }
 
     await prismaClient.registeredMoment.delete({

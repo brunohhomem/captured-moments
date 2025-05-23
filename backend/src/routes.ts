@@ -12,6 +12,7 @@ import { UploadFileController } from "./controller/Upload/UploadFileController";
 import { upload } from "./config/multer";
 import { DeleteFileController } from "./controller/Upload/DeleteFileController";
 import { DeleteMomentsController } from "./controller/Moments/DeleteMomentsController";
+import { UpdateIsFavoriteMomentsController } from "./controller/Moments/UpdateIsFavoriteMomentsController";
 
 export function routes(fastify: FastifyInstance) {
 
@@ -48,6 +49,11 @@ export function routes(fastify: FastifyInstance) {
   //MOMENT: UPDATE MOMENTS
   fastify.put('/edit-moment/:id', { preHandler: authenticateToken }, async (request: FastifyRequest, reply: FastifyReply) => {
     return new UpdateMomentsController().handle(request, reply)
+  })
+
+  // MOMENT: ATUALIZAR OS FAVORITOS DO MOMENTO
+  fastify.put('/update-is-favorite/:id', { preHandler: authenticateToken }, async (request: FastifyRequest, reply: FastifyReply) => {
+    return new UpdateIsFavoriteMomentsController().handle(request, reply)
   })
 
   // MOMENT: DELETAR MOMENTO
