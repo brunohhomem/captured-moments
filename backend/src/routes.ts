@@ -13,6 +13,7 @@ import { upload } from "./config/multer";
 import { DeleteFileController } from "./controller/Upload/DeleteFileController";
 import { DeleteMomentsController } from "./controller/Moments/DeleteMomentsController";
 import { UpdateIsFavoriteMomentsController } from "./controller/Moments/UpdateIsFavoriteMomentsController";
+import { DateFilterMomentsController } from "./controller/Moments/DateFilterMomentsController";
 
 export function routes(fastify: FastifyInstance) {
 
@@ -44,6 +45,11 @@ export function routes(fastify: FastifyInstance) {
   //MOMENT: SEARCH MOMENTS BY QUERY PARAMS
   fastify.get('/search', { preHandler: authenticateToken }, async (request: FastifyRequest, reply: FastifyReply) => {
     return new SearchAllMomentsController().handle(request, reply)
+  })
+
+  // MOMENT: FILTRO DE MOMENTOS
+  fastify.get('/registered-moment/filter', { preHandler: authenticateToken }, async (request: FastifyRequest, reply: FastifyReply) => {
+    return new DateFilterMomentsController().handle(request, reply)
   })
 
   //MOMENT: UPDATE MOMENTS
