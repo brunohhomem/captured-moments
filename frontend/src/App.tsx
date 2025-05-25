@@ -6,8 +6,6 @@ import { SignUp } from "./pages/Auth/SignUp";
 export function App() {
   return (
     <div>
-      <h1>codeweek</h1>
-
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
