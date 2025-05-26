@@ -1,19 +1,38 @@
 import { useState, type FormEvent } from "react"
 import { PasswordInput } from "../../components/Input/PasswordInput"
 import { validateEmail } from "../../utils/helpers"
+import { axiosInstance } from "../../api/axiosInstance"
+import { useNavigate } from "react-router-dom"
 
 export const Login = () => {
   const [email, setEmail] = useState<string>("")
   const [password, setPassword] = useState<string>("")
   const [error, setError] = useState<null | string>(null)
 
-  const handleLogin = (e: FormEvent) => {
+  const navigate = useNavigate()
+
+  const handleLogin = async (e: FormEvent) => {
     e.preventDefault()
 
     if (!validateEmail(email)) return setError("Please enter a valid email")
     if (!password) return setError("Please enter your password")
 
     setError("")
+
+    try {
+      const response = await axiosInstance.post('/login', {
+        email: email,
+        password: password
+      })
+
+      if (response.data && response.data.accessToken) {
+        localStorage.setItem("cm:token", response.data.accessToken)
+
+        navigate('/home')
+      }
+    } catch (error) {
+
+    }
   }
 
   return (
